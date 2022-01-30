@@ -1,0 +1,10 @@
+ 1.select count(title) from film where special_features LIKE "%Deleted Scenes%" and film_id in (select film_id from film_category where category_id=(select category_id from category where name="Documentary"));
+
+2.select count(*) from film_list where category='Sci-Fi' and FID in (select inventory.film_id from inventory,staff,rental where staff.first_name='Jon' and staff.last_name='Stephens' and staff.store_id = inventory.store_id and inventory.inventory_id = rental.inventory_id);
+
+3.select total_sales from sales_by_film_category where category="Animation";
+
+4.select category,count(category) from film_list where FID in (select inventory.film_id from inventory,rental,customer where inventory.inventory_id=rental.inventory_id and rental.customer_id=customer.customer_id and customer.first_name="PATRICIA" and customer.last_name="JOHNSON") group by category order by count(category) desc limit 3;
+
+5.select count(*) from film_list where rating ="R" and FID in (select inventory.film_id from customer,rental,inventory where customer.first_name="SUSAN" and customer.last_name="WILSON" and customer.customer_id=rental.customer_id and rental.inventory_id=inventory.inventory_id );
+

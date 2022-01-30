@@ -1,0 +1,13 @@
+ 1.select title from film where rating="PG-13" and film_id in (select film_id from film_category where category_id=(select category_id from category where name="Comedy"));
+
+ 2.select title from film_list where category="Horror" and FID in (select film_id from inventory where inventory_id in (select inventory_id from rental)) limit 3;
+--- another way
+select title from film_list where category="Horror" and FID in (select film_id from inventory join rental on inventory.inventory_id = rental.inventory_id) LIMIT 3;
+
+ 3.SELECT * FROM customer_list WHERE country = 'India' AND ID IN (SELECT rental.customer_id FROM film_list,inventory,rental WHERE film_list.category = 'Sports' AND film_list.FID = inventory.film_id AND rental.inventory_id = inventory.inventory_id);
+
+4.select * from customer_list where country="Canada" AND ID IN (SELECT rental.customer_id FROM actor,film_actor,inventory,rental WHERE actor.first_name = 'NICK' and actor.last_name='WAHLBERG' AND actor.actor_id=film_actor.actor_id AND film_actor.film_id = inventory.film_id AND rental.inventory_id = inventory.inventory_id);
+
+
+5.select count(film_actor.film_id) from film_actor,actor where actor.first_name="SEAN" and actor.last_name="WILLIAMS" and film_actor.actor_id=actor.actor_id;
+
